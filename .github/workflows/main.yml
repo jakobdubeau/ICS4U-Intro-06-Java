@@ -1,0 +1,35 @@
+GitHub Super Linter
+GitHub Action:
+
+place the following code at the root of your GitHub repo in:
+
+.github/workflows/main.yml
+
+WARNING!
+Never, never, never add this file in or touch it in Repl.it. ONLY add it in from GitHub.
+(If you do touch it in Repl.it, it will most likely lock your Repl and you will have to start all over again!)
+###############################################
+# Run GitHub's Super Linter against code base #
+###############################################
+
+name: GitHub's Super Linter
+
+on: [push, pull_request]
+
+jobs:
+  run-linters:
+    name: GitHub's Super Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@master
+        
+      - name: Run GitHub Super Linter
+        uses: github/super-linter@main
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_CLANG_FORMAT: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
